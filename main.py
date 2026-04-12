@@ -31,7 +31,7 @@ def get_gps_info(exif_data: dict) -> dict | None:
 def dms_to_decimal(dms: tuple, ref: str) -> float:
     """Convert degrees/minutes/seconds + hemisphere ref to decimal degrees."""
     degrees, minutes, seconds = dms
-    decimal = degrees + minutes / 60 + seconds / 3600
+    decimal = float(degrees) + float(minutes) / 60 + float(seconds) / 3600
     if ref in ("S", "W"):
         decimal = -decimal
     return decimal
