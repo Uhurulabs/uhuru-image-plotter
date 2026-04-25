@@ -100,5 +100,26 @@ MIT — see [LICENSE](LICENSE).
 
 Folded from `Uhurulabs/uhuru-image-plotter` on 2026-04-25. Sample images from
 the original repo (~25 MB of DJI test fixtures) were not folded; drop your
-own images into a directory and point the script at it. The original repo
-has been archived; future changes happen here.
+own images into a directory and point the script at it. Greybook is now the
+source of truth; the public repo at
+`https://github.com/Uhurulabs/uhuru-image-plotter` is a one-way mirror.
+
+## Publishing public updates
+
+Run from the greybook repo root after committing changes here:
+
+```bash
+git subtree push --prefix=tools/image-plotter \
+  git@github.com:Uhurulabs/uhuru-image-plotter.git main
+```
+
+Greybook is the source of truth — do not commit directly to the public repo.
+If `subtree push` fails because the public repo has diverged (someone else
+committed), reset it via force-push:
+
+```bash
+git subtree split --prefix=tools/image-plotter -b export-image-plotter && \
+  git push -f git@github.com:Uhurulabs/uhuru-image-plotter.git \
+    export-image-plotter:main && \
+  git branch -D export-image-plotter
+```
